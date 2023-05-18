@@ -13,6 +13,16 @@ class AppUser(auth_model.AbstractUser):
     MIN_FIRST_NAME_LEN = 5
     MAX_LAST_NAME_LEN = 20
     MIN_LAST_NAME_LEN = 5
+    MAX_USER_NAME_LEN = 20
+    MIN_USER_NAME_LEN = 5
+
+    username = models.CharField(
+        max_length=MAX_USER_NAME_LEN,
+        validators=(MinLengthValidator(MIN_USER_NAME_LEN),
+                    validate_only_letters(),),
+        blank=False,
+        null=False,
+    )
 
     first_name = models.CharField(
         max_length=MAX_FIRST_NAME_LEN,
