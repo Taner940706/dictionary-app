@@ -3,11 +3,12 @@ import urllib.request
 from random import random
 from decouple import config
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views import generic as views
 
 
-@login_required
-class Home(views.TemplateView):
+@method_decorator(login_required, name='dispatch')
+class HomeView(views.TemplateView):
     template_name = 'home.html'
 
     def get_context_data(self, **kwargs):
