@@ -40,5 +40,10 @@ class HomeView(views.TemplateView):
         return context
 
 
+class View404(views.TemplateView):
+    template_name = '404.html'
 
+
+class View500(views.TemplateView):
+    template_name = '500.html'
 
