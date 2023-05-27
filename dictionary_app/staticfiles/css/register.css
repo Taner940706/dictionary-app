@@ -1,0 +1,33 @@
+.centerImage {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
+#register_h1 {
+    color: #343C7A;
+    font-size: 50px;
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 20px;
+}
+
+section h2 {
+    color: #343C7A;
+    font-size: 30px;
+    text-align: center;
+     padding-bottom: 20px;
+}
+
+#id_username{
+    margin-bottom:10px;
+}
+#id_email{
+    margin-bottom:10px;
+}
+#id_password1{
+    margin-bottom:10px;
+}
+#id_password2{
+    margin-bottom:10px;
+}
