@@ -1,10 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% extends 'base.html' %}
+{% load add_class %}
+{% load placeholders %}
+{% load static %}
+{% block page_content %}
+    <!-- include error and success messages -->
+    {% include 'common/messages.html' %}
+    <form class="form-horizontal" action="{% url 'register' %}" method="post" id="registerForm"
+          enctype="multipart/form-data">
+        <fieldset>
+            <img src="{% static '' %}" class="centerImage" alt="лого">
+            <h1 id="register_h1">Dictionary App</h1>
+            <section class="vh-50">
+                <div class="container py-5 h-55">
+                    <div class="row d-flex justify-content-center align-items-center h-50">
+                        <div class="col-12 col-md-8 col-lg-7 col-xl-5">
+                            <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                                <div class="card-body p-5 text-center">
+                                    <h2>Registration</h2>
+                                    {{ form.username|form_class|placeholder:"Username: " }}
+                                    {{ form.email|form_class|placeholder:"Email: " }}
+                                    {{ form.password1|form_class|placeholder:"Password: " }}
+                                    {{ form.password2|form_class|placeholder:"Repeat Password: " }}
+                                    <br>
+                                    <input type="submit" id="btn-register" class="btn btn-custom btn-lg btn-block"
+                                           value="Enter">
+                                    {% csrf_token %}
+                                    <hr/>
+                                    <a class="link-primary" href="{% url 'login' %}">You have a registration?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </fieldset>
+    </form>
+{% endblock %}
