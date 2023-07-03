@@ -2,9 +2,40 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Home</title>
 </head>
 <body>
+<form class="d-flex">
+  <input class="border border-3 border-top-0 border-start-0 border-end-0" type="search" name="word" id="word" placeholder="Type word"
+    aria-label="Search" style=" outline: none;">
+  <button class="btn btn-primary" type="submit">Search </button>
+</form>
+
+{% if word %}
+
+<div class="card-group">
+  <div class="card">
+    <img class="card-img-top" src=url('{{ picture }}') alt="Card image cap">
+    <div class="card-body">
+      <h5 class="card-title">{{ word }}</h5>
+      <p class="card-text">{{ phonetics_text }}</p>
+        <p class="card-text">{{ origin }}</p>
+        <audio controls>
+  <source src={{ phonetics_audio }} type="audio/ogg">
+</audio>
+    </div>
+    <div class="card-footer">
+      <small class="text-muted">Source: {{ source }}</small>
+    </div>
+  </div>
+</div>
+
+{% else %}
+
+<p id="error">{{ word|upper }} doesn't found. Try again!</p>
+
+{% endif %}
+
 
 </body>
 </html>

@@ -4,7 +4,7 @@
 {% load static %}
 {% block page_content %}
     <!-- include error and success messages -->
-    {% include '' %}
+    {% include 'messages.html' %}
     <form class="form-horizontal" action="{% url 'login' %}" method="post" id="loginForm">
         <fieldset>
             <img src="{% static '' %}" class="centerImage" alt="лого">
