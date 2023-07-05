@@ -15,15 +15,22 @@
 
 <div class="card-group">
   <div class="card">
-    <img class="card-img-top" src=url('{{ picture }}') alt="Card image cap">
+    <img class="card-img-top" src={{ picture }}>
     <div class="card-body">
       <h5 class="card-title">{{ word }}</h5>
       <p class="card-text">{{ phonetics_text }}</p>
-        <p class="card-text">{{ origin }}</p>
         <audio controls>
   <source src={{ phonetics_audio }} type="audio/ogg">
 </audio>
     </div>
+      {% for part_of_speech, definiton, synonyms, antonyms in meanings.values %}
+      <div class="meanings">
+          <p>{{ part_of_speech }}</p>
+          <p>{{ definiton }}</p>
+            <p>{{ synonyms }}</p>
+            <p>{{ antonyms }}</p>
+      </div>
+      {% endfor %}
     <div class="card-footer">
       <small class="text-muted">Source: {{ source }}</small>
     </div>

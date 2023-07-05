@@ -1,6 +1,5 @@
 import json
 import urllib.request
-from random import random
 from decouple import config
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -15,7 +14,6 @@ class HomeView(views.TemplateView):
 
         part_of_speech = []
         definiton = []
-        example = []
         synonyms = []
         antonyms = []
 
@@ -31,19 +29,23 @@ class HomeView(views.TemplateView):
         data_pic = json.loads(source_pic)
 
         context['word'] = word
-        context['phonetics_text'] = str(data_dict['phonetics']['text'])
-        context['phonetics_audio'] = str(data_dict['phonetics']['audio'])
-        context['source'] = str(data_dict['phonetics']['sourceUrl'])
-        context['origin'] = str(data_dict['origin'])
+        context['phonetics_text'] = str(data_dict[0]['phonetics'][-1]['text'])
+        context['phonetics_audio'] = str(data_dict[0]['phonetics'][0]['audio'])
+        context['source'] = str(data_dict[0]['phonetics'][0]['sourceUrl'])
 
-        for i in range(3):
-            part_of_speech.append(str(data_dict['meanings'][i]['partOfSpeech']))
-            definiton.append(str(data_dict['meanings'][i]['definitions']['definition']))
-            example.append(str(data_dict['meanings'][i]['definitions']['example']))
-            synonyms.append(str(data_dict['meanings'][i]['definitions']['synonyms']))
-            antonyms.append(str(data_dict['meanings'][i]['definitions']['antonyms']))
+        for i in range(2):
+            part_of_speech.append(str(data_dict[0]['meanings'][i]['partOfSpeech']))
+            definiton.append(str(data_dict[0]['meanings'][i]['definitions'][0]['definition']))
+            synonyms.append(str(data_dict[0]['meanings'][i]['definitions'][0]['synonyms']))
+            antonyms.append(str(data_dict[0]['meanings'][i]['definitions'][0]['antonyms']))
 
-        context['picture'] = data_pic['hits'][random.randint(0, len(data_pic['hits']))]['webformatURL']
+        context['part_of_speech'] = part_of_speech
+        context['definiton'] = definiton
+        context['synonyms'] = synonyms
+        context['antonyms'] = antonyms
+
+        context['picture'] = data_pic['hits'][0]['webformatURL']
+        context['meanings'] = dict(enumerate(zip(context['part_of_speech'],context['definiton'],context['synonyms'], context['antonyms'])))
 
         return context
 
