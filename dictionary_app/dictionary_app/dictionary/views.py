@@ -2,6 +2,8 @@ import json
 import urllib.request
 from decouple import config
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
+from django.shortcuts import redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views import generic as views
 
@@ -31,9 +33,13 @@ class HomeView(views.TemplateView):
         context['word'] = word
         context['phonetics_text'] = str(data_dict[0]['phonetics'][-1]['text'])
         context['phonetics_audio'] = str(data_dict[0]['phonetics'][0]['audio'])
-        context['source'] = str(data_dict[0]['phonetics'][0]['sourceUrl'])
 
-        for i in range(2):
+        try:
+            context['source'] = str(data_dict[0]['phonetics'][0]['sourceUrl'])
+        except KeyError as ke:
+            raise Http404("No image")
+
+        for i in range(len(data_dict[0]['meanings'])):
             part_of_speech.append(str(data_dict[0]['meanings'][i]['partOfSpeech']))
             definiton.append(str(data_dict[0]['meanings'][i]['definitions'][0]['definition']))
             synonyms.append(str(data_dict[0]['meanings'][i]['definitions'][0]['synonyms']))

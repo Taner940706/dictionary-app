@@ -35,6 +35,6 @@ form {
     margin-bottom: 90px;
 }
 
-.row.no-gutters{
+.row.no-gutters < .col-md-8{
     background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
 }
