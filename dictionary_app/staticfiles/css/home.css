@@ -1,3 +1,8 @@
+body {
+  background: linear-gradient(45deg, red, blue);
+}
+
+
 .card.mb-7{
     max-width: 1200px;
     box-shadow: 10px 5px 5px 5px black;
@@ -11,6 +16,25 @@ audio{
 }
 
 
-h1, h2, h3, h4, h5, p{
+h1, h2, h3, h4, h5, p, #word, .btn.btn-primary{
     font-family: Papyrus, fantasy;
+}
+.btn.btn-primary{
+    margin-left: 5px;
+    border-radius: 28px;
+}
+
+#word {
+    margin-top: 60px;
+    text-align: center;
+    margin-left: 50%;
+    background: linear-gradient(45deg, red, blue);
+
+}
+form {
+    margin-bottom: 90px;
+}
+
+.row.no-gutters{
+    background: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
 }
