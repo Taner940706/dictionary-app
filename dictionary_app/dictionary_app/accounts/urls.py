@@ -11,3 +11,4 @@ urlpatterns = (
         path('delete/', UserDeleteView.as_view(), name='delete user'),
     ])),
 )
+

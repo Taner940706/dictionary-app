@@ -1,11 +1,15 @@
 import json
 import urllib.request
+from http.client import HTTPException
+from urllib.error import URLError
+
 from decouple import config
 from django.contrib.auth.decorators import login_required
-from django.http import Http404
-from django.shortcuts import redirect, get_object_or_404
+from django.http import Http404, HttpResponse, JsonResponse
+from django.shortcuts import redirect, render
 from django.utils.decorators import method_decorator
 from django.views import generic as views
+from urllib3.exceptions import HTTPError
 
 
 @method_decorator(login_required, name='dispatch')
@@ -19,25 +23,39 @@ class HomeView(views.TemplateView):
         synonyms = []
         antonyms = []
 
-
         context = super().get_context_data(**kwargs)
-
         word = str(self.request.GET.get('word'))
+        source_dict = urllib.request.urlopen(
+            'https://api.dictionaryapi.dev/api/v2/entries/en/' + (word.replace(" ", "%20"))).read()
 
-        source_dict = urllib.request.urlopen('https://api.dictionaryapi.dev/api/v2/entries/en/' + word).read()
-        source_pic = urllib.request.urlopen('https://pixabay.com/api/?key=' + config('API_KEY_PIC') + '&q=' + (word.replace(" ", "%20"))).read()
+        source_pic = urllib.request.urlopen(
+            'https://pixabay.com/api/?key=' + config('API_KEY_PIC') + '&q=' + (word.replace(" ", "%20"))).read()
 
         data_dict = json.loads(source_dict)
         data_pic = json.loads(source_pic)
 
         context['word'] = word
-        context['phonetics_text'] = str(data_dict[0]['phonetics'][-1]['text'])
-        context['phonetics_audio'] = str(data_dict[0]['phonetics'][0]['audio'])
+
+        try:
+            context['phonetics_text'] = str(data_dict[0]['phonetics'][-1]['text'])
+        except KeyError as ke:
+            pass
+        except IndexError as ind:
+            pass
+
+        try:
+            context['phonetics_audio'] = str(data_dict[0]['phonetics'][0]['audio'])
+        except KeyError as ke:
+            pass
+        except IndexError as ind:
+            pass
 
         try:
             context['source'] = str(data_dict[0]['phonetics'][0]['sourceUrl'])
         except KeyError as ke:
-            raise Http404("No image")
+            pass
+        except IndexError as ind:
+            pass
 
         for i in range(len(data_dict[0]['meanings'])):
             part_of_speech.append(str(data_dict[0]['meanings'][i]['partOfSpeech']))
@@ -52,6 +70,7 @@ class HomeView(views.TemplateView):
 
         context['picture'] = data_pic['hits'][0]['webformatURL']
         context['meanings'] = dict(enumerate(zip(context['part_of_speech'],context['definiton'],context['synonyms'], context['antonyms'])))
+
 
         return context
 
