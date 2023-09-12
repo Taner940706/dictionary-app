@@ -8,7 +8,7 @@
     <form class="form-horizontal" action="{% url 'register' %}" method="post" id="registerForm"
           enctype="multipart/form-data">
         <fieldset>
-            <img src="{% static '' %}" class="centerImage" alt="лого">
+            <img src="{% static 'logo.png' %}" class="centerImage" alt="лого">
             <h1 id="register_h1">Dictionary App</h1>
             <section class="vh-50">
                 <div class="container py-5 h-55">
@@ -22,8 +22,8 @@
                                     {{ form.password1|form_class|placeholder:"Password: " }}
                                     {{ form.password2|form_class|placeholder:"Repeat Password: " }}
                                     <br>
-                                    <input type="submit" id="btn-register" class="btn btn-custom btn-lg btn-block"
-                                           value="Enter">
+                                    <input type="submit" id="btn-register" class="btn btn-primary"
+                                           value="Register">
                                     {% csrf_token %}
                                     <hr/>
                                     <a class="link-primary" href="{% url 'login' %}">You have a registration?</a>

@@ -7,7 +7,7 @@
     {% include 'messages.html' %}
     <form class="form-horizontal" action="{% url 'login' %}" method="post" id="loginForm">
         <fieldset>
-            <img src="{% static '' %}" class="centerImage" alt="лого">
+            <img src="{% static 'logo.png' %}" class="centerImage" alt="лого">
             <h1 id="login_h1">Dictionary App</h1>
             <section class="vh-50">
                 <div class="container py-5 h-40">
@@ -20,8 +20,8 @@
                                     {{ form.password|form_class|placeholder:"Password: " }}
                                     <input type="hidden" name="next" value="{{ next }}">
                                     <br>
-                                    <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block"
-                                           value="Enter">
+                                    <input type="submit" id="btn-login" class="btn btn-primary"
+                                           value="Login">
                                     {% csrf_token %}
                                     <hr/>
                                     <a class="link-primary" href="{% url 'register' %}">You don't have a
