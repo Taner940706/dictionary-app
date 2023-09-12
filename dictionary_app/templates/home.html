@@ -3,13 +3,22 @@
 {% load static %}
 
 {% block page_content %}
+    <div class="dropdown" style="float:left;">
+  <button class="dropbtn">Menu</button>
+  <div class="dropdown-content" style="left:0;">
+  <a href="{% url 'edit user' pk=request.user.id %}">Edit User</a>
+  <a href="{% url 'delete user' pk=request.user.id %}">Delete User</a>
+  <a href="{% url 'logout' %}">Logout</a>
+  </div>
+    <span>Welcome {{ request.user.username }}!</span>
+</div>
 <form>
   <input class="border border-3 border-top-0 border-start-0 border-end-0" type="search" name="word" id="word" placeholder="Type word"
     aria-label="Search" style=" outline: none;">
   <button class="btn btn-primary" type="submit">Search </button>
 </form>
 
-    {% if word %}
+    {% if word != "None" %}
 <div class="d-flex justify-content-center vh-80 align-items-center">
     <div class="card mb-7">
   <div class="row no-gutters">
@@ -53,7 +62,7 @@
 </div>
 {% else %}
 
-<p id="error">{{ word|upper }} doesn't found. Try again!</p>
+<p id="error">Welcome to Dictionary App. Please type a word :)</p>
 
 {% endif %}
 
