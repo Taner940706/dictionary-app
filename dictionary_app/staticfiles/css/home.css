@@ -27,7 +27,7 @@ h1, h2, h3, h4, h5, p, #word, .btn.btn-primary{
 #word {
     margin-top: 60px;
     text-align: center;
-    margin-left: 50%;
+    margin-left: 30%;
     background: linear-gradient(45deg, red, blue);
 
 }

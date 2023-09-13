@@ -12,18 +12,24 @@
   </div>
     <span>Welcome {{ request.user.username }}!</span>
 </div>
-<form>
+    <form>
   <input class="border border-3 border-top-0 border-start-0 border-end-0" type="search" name="word" id="word" placeholder="Type word"
     aria-label="Search" style=" outline: none;">
   <button class="btn btn-primary" type="submit">Search </button>
 </form>
+
+
 
     {% if word != "None" %}
 <div class="d-flex justify-content-center vh-80 align-items-center">
     <div class="card mb-7">
   <div class="row no-gutters">
     <div class="col-md-8">
+        {% if picture %}
       <img src={{ picture }} class="card-img" alt="{{ word }} picture">
+            {% else %}
+            <img src={% static 'no-image.jpeg' %} class="card-img" alt="No image">
+            {% endif %}
     </div>
     <div class="col-md-4">
       <div class="card-body">
@@ -47,7 +53,7 @@
       <hr>
       </div>
       {% endfor %}
-      <audio controls>
+      <audio controls style="width: 200px;">
   <source src={{ phonetics_audio }} type="audio/ogg">
 </audio>
       {% if source %}

@@ -68,7 +68,11 @@ class HomeView(views.TemplateView):
         context['synonyms'] = synonyms
         context['antonyms'] = antonyms
 
-        context['picture'] = data_pic['hits'][0]['webformatURL']
+        try:
+            context['picture'] = data_pic['hits'][0]['webformatURL']
+        except IndexError as ind:
+            pass
+
         context['meanings'] = dict(enumerate(zip(context['part_of_speech'],context['definiton'],context['synonyms'], context['antonyms'])))
 
 

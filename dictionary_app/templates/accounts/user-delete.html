@@ -4,14 +4,16 @@
     <form class="form-horizontal" action=""{% url 'delete user' pk=object.pk %} method="post" id="deleteUserForm"
           enctype="multipart/form-data">
         <fieldset>
-            <img src="{% static 'logo.png' %}" class="centerImage" alt="лого">
-            <h1 id="login_h1">Dictionary App</h1>
+
+
             <section class="vh-50">
                 <div class="container py-5 h-40">
+                    <img src="{% static 'logo.png' %}" class="centerImage" alt="лого">
                     <div class="row d-flex justify-content-center align-items-center h-30">
                         <div class="col-12 col-md-8 col-lg-7 col-xl-5">
                             <div class="card shadow-2-strong" style="border-radius: 1rem;">
                                 <div class="card-body p-5 text-center">
+                                    <h1 id="login_h1">Dictionary App</h1>
                                     <h2>Delete profile</h2>
                                     <div class="form-group">
                                         <label for="username" class="sr-only">Username:</label>
