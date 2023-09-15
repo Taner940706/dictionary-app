@@ -34,6 +34,8 @@ class HomeView(generic.TemplateView):
             data_pic = json.loads(source_pic)
         except urllib.error.HTTPError as err:
             print(f'A HTTPError was thrown: {err.code} {err.reason}')
+        except KeyError as k:
+            pass
 
         if data_dict is not None:
             context['word'] = word
@@ -41,8 +43,10 @@ class HomeView(generic.TemplateView):
             if 'phonetics' in data_dict[0] and data_dict[0]['phonetics']:
                 context['phonetics_text'] = str(data_dict[0]['phonetics'][-1]['text'])
                 context['phonetics_audio'] = str(data_dict[0]['phonetics'][0]['audio'])
-                context['source'] = str(data_dict[0]['phonetics'][0]['sourceUrl'])
-
+                try:
+                    context['source'] = str(data_dict[0]['phonetics'][0]['sourceUrl'])
+                except KeyError as k:
+                    pass
             for i in range(len(data_dict[0]['meanings'])):
                 part_of_speech.append(str(data_dict[0]['meanings'][i]['partOfSpeech']))
                 definition.append(str(data_dict[0]['meanings'][i]['definitions'][0]['definition']))

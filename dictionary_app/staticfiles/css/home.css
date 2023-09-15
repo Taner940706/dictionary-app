@@ -35,7 +35,7 @@ form {
     margin-bottom: 90px;
 }
 
-#error {
+#error, no-search {
     color: white;
     text-align: center;
 }
