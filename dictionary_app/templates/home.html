@@ -19,6 +19,7 @@
 </form>
 
 
+{% if word %}
 
     {% if word != "None" %}
 <div class="d-flex justify-content-center vh-80 align-items-center">
@@ -71,5 +72,10 @@
 <p id="error">Welcome to Dictionary App. Please type a word :)</p>
 
 {% endif %}
+
+    {% else %}
+
+    <p>Word doesn't exist in dictionary</p>
+    {% endif %}
 
 {% endblock %}
