@@ -3,13 +3,10 @@
 {% load placeholders %}
 {% load static %}
 {% block page_content %}
-    <!-- include error and success messages -->
     {% include 'messages.html' %}
     <form class="form-horizontal" action="{% url 'register' %}" method="post" id="registerForm"
           enctype="multipart/form-data">
         <fieldset>
-
-
             <section class="vh-50">
                 <div class="container py-5 h-55">
                     <img src="{% static 'logo.png' %}" class="centerImage" alt="лого">

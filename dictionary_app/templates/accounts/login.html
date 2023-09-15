@@ -3,11 +3,9 @@
 {% load add_class %}
 {% load static %}
 {% block page_content %}
-    <!-- include error and success messages -->
     {% include 'messages.html' %}
     <form class="form-horizontal" action="{% url 'login' %}" method="post" id="loginForm">
         <fieldset>
-
             <section class="vh-50">
                 <div class="container py-5 h-40">
                     <img src="{% static 'logo.png' %}" class="centerImage" alt="лого">

@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from decouple import config
 
+
 @method_decorator(login_required, name='dispatch')
 class HomeView(generic.TemplateView):
     template_name = 'home.html'
@@ -20,17 +21,19 @@ class HomeView(generic.TemplateView):
         word = str(self.request.GET.get('word'))
 
         source_dict = None  # Initialize source_dict with a default value
-        data_dict = None    # Initialize data_dict with a default value
-        data_pic = None     # Initialize data_pic with a default value
+        data_dict = None  # Initialize data_dict with a default value
+        data_pic = None  # Initialize data_pic with a default value
 
         try:
-            source_dict = urllib.request.urlopen('https://api.dictionaryapi.dev/api/v2/entries/en/' + (word.replace(" ", "%20"))).read()
+            source_dict = urllib.request.urlopen(
+                'https://api.dictionaryapi.dev/api/v2/entries/en/' + (word.replace(" ", "%20"))).read()
             data_dict = json.loads(source_dict)
         except urllib.error.HTTPError as err:
             pass
 
         try:
-            source_pic = urllib.request.urlopen('https://pixabay.com/api/?key=' + config('API_KEY_PIC') + '&q=' + (word.replace(" ", "%20"))).read()
+            source_pic = urllib.request.urlopen(
+                'https://pixabay.com/api/?key=' + config('API_KEY_PIC') + '&q=' + (word.replace(" ", "%20"))).read()
             data_pic = json.loads(source_pic)
         except urllib.error.HTTPError as err:
             print(f'A HTTPError was thrown: {err.code} {err.reason}')
@@ -61,7 +64,8 @@ class HomeView(generic.TemplateView):
             if data_pic is not None and 'hits' in data_pic and data_pic['hits']:
                 context['picture'] = data_pic['hits'][0]['webformatURL']
 
-            context['meanings'] = dict(enumerate(zip(context['part_of_speech'], context['definition'], context['synonyms'], context['antonyms'])))
+            context['meanings'] = dict(enumerate(
+                zip(context['part_of_speech'], context['definition'], context['synonyms'], context['antonyms'])))
 
         return context
 

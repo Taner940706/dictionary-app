@@ -54,6 +54,3 @@ class UserDeleteView(SuccessMessageMixin, views.DeleteView):
 class SignOutView(SuccessMessageMixin, auth_views.LogoutView):
     next_page = reverse_lazy('login')
     success_message = "User was logged out successfully"
-
-
-

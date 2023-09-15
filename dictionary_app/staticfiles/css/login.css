@@ -5,9 +5,9 @@
 
 
 #login .btn.btn-custom {
-  margin-bottom: 20px;
-  background-color:#025193;
-  color:white;
+    margin-bottom: 20px;
+    background-color: #025193;
+    color: white;
 }
 
 .centerImage {
@@ -16,6 +16,7 @@
     margin-right: auto;
     width: 25%;
 }
+
 #login_h1 {
     color: #343C7A;
     font-size: 50px;
@@ -28,12 +29,13 @@ section h2 {
     color: #343C7A;
     font-size: 30px;
     text-align: center;
-     padding-bottom: 20px;
+    padding-bottom: 20px;
 }
 
-#id_username{
-    margin-bottom:10px;
+#id_username {
+    margin-bottom: 10px;
 }
-#id_password{
-    margin-bottom:10px;
+
+#id_password {
+    margin-bottom: 10px;
 }

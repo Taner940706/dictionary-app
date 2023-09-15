@@ -25,34 +25,34 @@ class UserAdmin(auth_admin.UserAdmin):
             }),
         (
             'Personal Info',
-         {
-             'fields': (
-                 'first_name',
-                 'last_name',
-                 'email',
-                 'picture',
-             ),
-         },
-    ),
-    (
-        'Permissons',
-        {
-            'fields': (
-                'is_active',
-                'is_staff',
-                'is_superuser',
-                'groups',
-                'user_permissions',
-            ),
-        },
-    ),
-    (
-        'Important dates',
-        {
-            'fields': (
-                'last_login',
-                'date_joined',
-            ),
-        },
-    ),
+            {
+                'fields': (
+                    'first_name',
+                    'last_name',
+                    'email',
+                    'picture',
+                ),
+            },
+        ),
+        (
+            'Permissons',
+            {
+                'fields': (
+                    'is_active',
+                    'is_staff',
+                    'is_superuser',
+                    'groups',
+                    'user_permissions',
+                ),
+            },
+        ),
+        (
+            'Important dates',
+            {
+                'fields': (
+                    'last_login',
+                    'date_joined',
+                ),
+            },
+        ),
     )
